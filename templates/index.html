@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Chart Type</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <script src="../static/js/chart-handler.js"></script>
+    <script src="../static/js/scripts.js"></script>
+</head>
+<body>
+    <div class="navbar">
+        <a href="/">Home</a>
+        <a href="/chart">Chart</a>
+      </div>
+    <div class="container">
+        <h1>Welcome to the Chart Selector</h1>
+        <button id="openModal">Click to Choose</button>
+    </div>
+
+    <div id="chartModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+        <form id="chartForm" action="/select_chart" method="POST">
+            <label for="chart_type">Select Chart Type:</label>
+            <select name="chart_type" id="chart_type">
+                <option value="" {% if not chart_type %} selected {% endif %}>--Select--</option>
+                {% for type in chart_types %}
+                    <option value="{{ type }}" {% if chart_type == type %} selected {% endif %}>{{ type.capitalize() }} Chart</option>
+                {% endfor %}
+            </select>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
